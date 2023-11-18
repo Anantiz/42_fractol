@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 15:44:06 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:46:05 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ unsigned int	mandlebrot_set(t_i *c);
 HOOKS
 */
 void	cptn_hook_escape(void *param);
-void	cptn_hook_shift_zoom(void *param)
-void	cptn_hook_shift_movr_cam(void *param)
+void	cptn_hook_zoom(void *param);
+void	cptn_hook_move_cam(void *param);
 void	cptn_hook_shift_color(void *param);
 
 /*
