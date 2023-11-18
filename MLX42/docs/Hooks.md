@@ -89,17 +89,6 @@ Use a key hook if you want single keypress detection or more precision as to how
 
 ```c
 
-/**
- * Key function callback data.
- * Data related to the mlx_key_hook function
- * 
- * @param key The key that was pressed.
- * @param action The action that was done with the key.
- * @param os_key The os_key is unique for every key, and will have a 
- * different value/keycode depending on the platform. 
- * They may be consistent on different platforms.
- * @param modifier The modifier key that was pressed, 0 if none.
- */
 typedef struct mlx_key_data
 {
 	keys_t		key;
