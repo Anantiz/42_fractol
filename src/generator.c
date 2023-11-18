@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:04:29 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 17:48:14 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 18:25:09 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	generate_fractal(t_param *p)
 		return (-3);
 	ft_image_update(p);
 	ft_printf("Init done\n");
-	mlx_loop_hook(p->mlx, cptn_hook_escape, p);
+	mlx_key_hook(p->mlx, cptn_hook_keys, p);
 	mlx_loop(p->mlx);
 	mlx_terminate(p->mlx);
 	return (0);

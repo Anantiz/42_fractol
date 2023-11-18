@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 18:00:28 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 18:21:35 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	checkif_error(int error, t_param *p)
 	if (error < 100 && error >= 0)
 		error += init_size(NULL, p);
 	error -= 100;
-	if (p->set == 'J')
+	if (p->set == 'J' || error >= 10)
 	{
 		if (error >= 10)
 			error -= 10;
@@ -135,5 +135,6 @@ int	init_param(char **argv, int argc, t_param *p)
 	p->colors.green = GREEN_HUE;
 	p->colors.blue = BLUE_HUE;
 	p->colors.void_color = VOID_COLOR;
+	p->colors.magic = 2.0;
 	return (error);
 }

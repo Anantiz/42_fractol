@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 18:00:50 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 18:25:25 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 #include <fcntl.h>
 
 # ifndef MAX_ITER
-#  define MAX_ITER 64
+#  define MAX_ITER 256
 # endif
 # if (MAX_ITER > 512 || MAX_ITER <= 0)
 #  define MAX_ITER 64
 # endif
-# define MAX_CONVERGE 6
+# define MAX_CONVERGE 8
 
 typedef struct s_idouble
 {
@@ -40,6 +40,7 @@ typedef struct s_colors
 	uint8_t			green;
 	uint8_t			blue;
 	unsigned int	void_color;
+	float			magic;
 }t_colors;
 
 typedef struct s_param
@@ -73,7 +74,7 @@ unsigned int	mandlebrot_set(t_colors *colors, t_i *c);
 /*
 HOOKS
 */
-void			cptn_hook_escape(void *param);
+void			cptn_hook_keys(void *param);
 void			cptn_hook_zoom(void *param);
 void			cptn_hook_move_cam(void *param);
 void			cptn_hook_shift_color(void *param);
