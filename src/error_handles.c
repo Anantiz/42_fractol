@@ -6,13 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 15:07:04 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 17:53:08 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	args_help()
+int	args_help(void)
 {
 	ft_printf("Parameters:"
 	"\n\t(required)set=your_set     Fractal Sets:  'M'= Mandlebrot "

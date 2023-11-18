@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/18 15:44:22 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/18 16:54:18 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,22 +36,18 @@ SRC_FILES:= main.c \
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))
 
-all: $(NAME)
-
-libmlx: $(LIBMLX)
+all: fractol
 
 $(LIBMLX):
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
 	@mv $(LIBMLX_PATH)/build/$@ ./
 	
-libft: $(LIBFT)
-
 $(LIBFT):
 	@make -C $(LIBFT_PATH)/ all
 	@make -C $(LIBFT_PATH)/ clean
 	@mv $(LIBFT_PATH)/$@ ./
 
-DO_LIBS: libft libmlx
+DO_LIBS: $(LIBFT) $(LIBMLX)
 
 $(NAME): $(SRC_OBJECTS) | DO_LIBS
 	@$(CC) $^ $(LIBS) $(CFLAGS) -o $@

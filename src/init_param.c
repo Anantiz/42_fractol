@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 15:29:43 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 18:00:28 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 #define WIN_LARGEY 1368
 #define WIN_BIGCHUNGUSX 3840
 #define WIN_BIGCHUNGUSY 2160
+
+#define RED_HUE 219
+#define GREEN_HUE 67
+#define BLUE_HUE 165
+#define VOID_COLOR 0x000000FF
+
 
 /*
 Predefined size, all are 3:2 for ease of display.
@@ -94,18 +100,12 @@ static int	checkif_error(int error, t_param *p)
 	if (p->set == 'J')
 	{
 		if (error >= 10)
-		{
 			error -= 10;
-			printf("CONST: r=%LF  i=%LF\n", p->c.r, p->c.i);
-		}
 		else
 			init_const(NULL, p);
 	}
 	if (p->set == '0')
 		error -= 1000;
-	// ft_printf("SET=%c\n", p->set);
-	// if (error)
-	// 	ft_printf("parse_error=%d\n", error);
 	return (error);
 }
 
@@ -131,5 +131,9 @@ int	init_param(char **argv, int argc, t_param *p)
 	}
 	error = checkif_error(error, p);
 	p->zoom = 1.0;
+	p->colors.red = RED_HUE;
+	p->colors.green = GREEN_HUE;
+	p->colors.blue = BLUE_HUE;
+	p->colors.void_color = VOID_COLOR;
 	return (error);
 }
