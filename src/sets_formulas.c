@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 12:51:06 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 14:42:23 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static unsigned int get_color(unsigned int n)
 	color = (red << 24) + (green << 16) + (blue << 8) + 255;
 	return (color);
 }
-
-unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z starts at 0
+/*
+C is a constant based on pixel value, Z starts at 0
+*/
+unsigned int	mandlebrot_set(t_i *c)
 {
 	unsigned int	n;
 	long double		zr;
@@ -52,22 +54,24 @@ unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z s
 	z.r = 0;
 	z.i = 0;
 	n = 0;
-	FILE *fd = fopen("log.txt", "a");
-	fprintf(fd,"r=%LF  i=%LF\n",c->r, c->i);
+	//FILE *fd = fopen("log.txt", "a");
+	//fprintf(fd,"r=%LF  i=%LF\n",c->r, c->i);
 	while (n < MAX_ITER)
 	{
 		if (((z.r * z.r) + (z.i * z.i)) > MAX_CONVERGE)
 			break ;
 		zr = z.r;
-		z.r = (z.r * z.i) - (z.i * z.r) + c->r; // Z = Z^2 + C  
-		z.i = (zr * z.i) + (z.i * zr) + c->i;
+		z.r = (z.r * z.r) - (z.i * z.i) + c->r; // R = r*r - i*i + c.r
+		z.i = 2 * (zr * z.i) + c->i;  //  I = 2 * i*r + c.i
 		n++;
 	}
-	fclose(fd);
+	//fclose(fd);
 	return (get_color(n));
 }
-
-unsigned int	julia_set(t_i *z, t_i *c) // C is a constant given as input, Z starts with the pixel
+/*
+C is a constant given as input, Z starts with the pixel
+*/
+unsigned int	julia_set(t_i *c, t_i *z)
 {
 	unsigned int	n;
 	long double		zr;
@@ -78,8 +82,8 @@ unsigned int	julia_set(t_i *z, t_i *c) // C is a constant given as input, Z star
 		if ((z->r * z->r + z->i * z->i) > MAX_CONVERGE)
 			break ;
 		zr = z->r;
-		z->r = (z->r * z->i) - (z->i * z->r) + c->r;
-		z->i = (zr * z->i) + (z->i * zr) + c->i;
+		z->r = (z->r * z->r) - (z->i * z->i) + c->r;
+		z->i = 2 * (zr * z->i) + c->i;
 		n++;
 	}
 	return (get_color(n));

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 12:45:00 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:12:21 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 	long double	r;
 	long double	i;
 
-	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->screen_resolution;
-	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->screen_resolution;
+	r = (pixel_pos->r - p->img_origin.r) * (1.0 / p->zoom) * p->screen_resolution;
+	i = (pixel_pos->i - p->img_origin.i) * (1.0 / p->zoom) * p->screen_resolution;
 	pixel_pos->i = i;
 	pixel_pos->r = r;
 }
@@ -30,12 +30,16 @@ int	ft_init_image(t_param *p)
 	unsigned int	pixel_y;
 	unsigned int	color;
 
-	//y 1:-1	x 1:-2
-	/*
-	0:0 will be middle of the image 2/3 right
-	*/
-	p->img_origin.r = p->w - (p->w / 3);
-	p->img_origin.i = p->h / 2;
+	if (p->set == 'M')
+	{
+		p->img_origin.r = p->w - (p->w / 3);
+		p->img_origin.i = p->h / 2;
+	}
+	else if (p->set == 'J')
+	{
+		p->img_origin.r = p->w / 2;
+		p->img_origin.i = p->h / 2;
+	}
 	printf("W=%u H=%u\n",p->w, p->h);
 	printf("origin R=%LF\torigin I=%LF\n",p->img_origin.r, p->img_origin.i);
 	color = 0;

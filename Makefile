@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/18 11:28:49 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/18 15:44:22 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_FILES:= main.c \
 	sets_formulas.c \
 	error_handles.c \
 	ft_atoz.c \
-	init_param.c
+	init_param.c \
+	captain_hook.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))

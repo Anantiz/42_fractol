@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/11/17 10:49:53 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/18 15:04:12 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ LIB_FT_FILES:=ft_atoi.c \
 	ft_send_to_buffer.c \
 	ft_arg_to_buffer.c \
 	ft_lltoa.c \
-	ft_atoldb.c
+	ft_atoldb.c \
+	ft_atoll.c
 
 LIB_FT_FILES:= $(addprefix $(LIB_FT_PATH)/,$(LIB_FT_FILES))
 LIB_FT_OBJECTS:= $(patsubst %.c,%.o,$(LIB_FT_FILES))

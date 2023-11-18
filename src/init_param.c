@@ -6,21 +6,20 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 12:48:49 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:29:43 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-
-#define WIN_BABYX 150
-#define WIN_BABYY 100
-#define WIN_SMALLX 600
-#define WIN_SMALLY 400
-#define WIN_MEDIUMX 1200
-#define WIN_MEDIUMY 800
-#define WIN_LARGEX 2400
-#define WIN_LARGEY 1600
+#define WIN_SMALLX 854
+#define WIN_SMALLY 480
+#define WIN_MEDIUMX 1600
+#define WIN_MEDIUMY 900
+#define WIN_LARGEX 2432
+#define WIN_LARGEY 1368
+#define WIN_BIGCHUNGUSX 3840
+#define WIN_BIGCHUNGUSY 2160
 
 /*
 Predefined size, all are 3:2 for ease of display.
@@ -42,14 +41,13 @@ static int	init_size(char *str, t_param *p)
 			p->w = WIN_LARGEX;
 			p->h = WIN_LARGEY;
 		}
-		else if (!ft_strncmp(str, "baby", 4))
-		{
-			p->w = WIN_BABYX;
-			p->h = WIN_BABYY;
+		else if (!ft_strncmp(str, "big_chungus", 11))
+		{		
+			p->w = WIN_BIGCHUNGUSX;
+			p->h = WIN_BIGCHUNGUSY;			
 		}
 	}
-	p->screen_resolution = (long double)1 / (p->h / 2.0);
-	printf("resolution = %LF\n", p->screen_resolution);
+	p->screen_resolution = (long double)1 / (p->h / 2.5);
 	return (100);
 }
 /*
@@ -62,7 +60,7 @@ static int	init_const(char *str, t_param *p)
 	error = ft_atoz(&p->c, str);
 	if (error)
 	{
-		p->set = 0;
+		p->set = '0';
 		error_invalid_constant(error);
 		return (-1000);
 	}
@@ -79,7 +77,7 @@ static int	init_set(char *str, t_param *p)
 		p->set = 'J';
 	else
 	{
-		p->set = 0;
+		p->set = '0';
 		error_invalid_set(*str);
 		return (-1000);
 	}
@@ -88,7 +86,9 @@ static int	init_set(char *str, t_param *p)
 
 static int	checkif_error(int error, t_param *p)
 {
-	if (error < 100 && error > 0)
+	if (error < 0)
+		return (error);
+	if (error < 100 && error >= 0)
 		error += init_size(NULL, p);
 	error -= 100;
 	if (p->set == 'J')
@@ -103,9 +103,9 @@ static int	checkif_error(int error, t_param *p)
 	}
 	if (p->set == '0')
 		error -= 1000;
-	ft_printf("SET=%c\n", p->set);
-	if (error)
-		ft_printf("parse_error=%d\n", error);
+	// ft_printf("SET=%c\n", p->set);
+	// if (error)
+	// 	ft_printf("parse_error=%d\n", error);
 	return (error);
 }
 
@@ -122,11 +122,11 @@ int	init_param(char **argv, int argc, t_param *p)
 	p->set = '0';
 	while (argc-- > 1)
 	{
-		if (ft_strncmp(argv[argc], "set=", 4) == 0)
+		if (!ft_strncmp(argv[argc], "set=", 4))
 			error += init_set(&argv[argc][4], p);
-		else if (ft_strncmp(argv[argc], "const=", 6) == 0)
+		else if (!ft_strncmp(argv[argc], "const=", 6))
 			error += init_const(&argv[argc][6], p);
-		else if (ft_strncmp(argv[argc], "size=", 5) == 0)
+		else if (!ft_strncmp(argv[argc], "size=", 5))
 			error += init_size(&argv[argc][5], p);
 	}
 	error = checkif_error(error, p);

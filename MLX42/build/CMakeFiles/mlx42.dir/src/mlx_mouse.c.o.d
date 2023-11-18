@@ -1,7 +1,7 @@
 CMakeFiles/mlx42.dir/src/mlx_mouse.c.o: \
-  /local-home/aurban/42proj/safe/fractol/MLX42/src/mlx_mouse.c \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/MLX42/MLX42_Int.h \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/MLX42/../MLX42/MLX42.h \
+  /local-home/aurban/42proj/fractol/MLX42/src/mlx_mouse.c \
+  /local-home/aurban/42proj/fractol/MLX42/include/MLX42/MLX42_Int.h \
+  /local-home/aurban/42proj/fractol/MLX42/include/MLX42/../MLX42/MLX42.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stddef.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/__stddef_max_align_t.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stdint.h \
@@ -21,11 +21,11 @@ CMakeFiles/mlx42.dir/src/mlx_mouse.c.o: \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stdbool.h \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/MLX42/../lodepng/lodepng.h \
+  /local-home/aurban/42proj/fractol/MLX42/include/MLX42/../lodepng/lodepng.h \
   /usr/include/string.h \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/MLX42/../glad/glad.h \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/KHR/khrplatform.h \
-  /local-home/aurban/42proj/safe/fractol/MLX42/include/MLX42/../KHR/khrplatform.h \
+  /local-home/aurban/42proj/fractol/MLX42/include/MLX42/../glad/glad.h \
+  /local-home/aurban/42proj/fractol/MLX42/include/KHR/khrplatform.h \
+  /local-home/aurban/42proj/fractol/MLX42/include/MLX42/../KHR/khrplatform.h \
   /usr/include/GLFW/glfw3.h /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atodb.c                                         :+:      :+:    :+:   */
+/*   ft_atoldb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:25:28 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/17 10:49:36 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:02:58 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@ static long double	get_decimal(char *str)
 {
 	long double	n;
 	long double	i;
+	long double sign;
 
+	sign = 1.0;
+	if (*str == '-')
+	{
+		sign = -1.0;
+		str++;	
+	}
+	else if(*str == '+')
+		str++;		
 	n = 0.0;
 	i = 10;
 	while (ft_isdigit((int)(*str)))
@@ -25,7 +34,7 @@ static long double	get_decimal(char *str)
 		i *= 10;
 		str++;
 	}
-	return (n);
+	return (n * sign);
 }
 
 long double	ft_atoldb(char *str)
