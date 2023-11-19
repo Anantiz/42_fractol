@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:40:05 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 12:32:20 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:48:48 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ void	cptn_hook_keys(mlx_key_data_t keydata, void *param)
 	if (keydata.action == MLX_RELEASE)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
-	{
-		mlx_terminate(p->mlx);
-		p->mlx = NULL;
-	}
+		mlx_close_window(p->mlx);
 	else if (keydata.key == MLX_KEY_RIGHT)
 		move_cam(p, MV_RIGHT);
 	else if (keydata.key == MLX_KEY_LEFT)

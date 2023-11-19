@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/11/18 16:34:27 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/19 12:57:24 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIB_FT_PATH:=.
 
 CC:=gcc
 INCLUDE_PATH= ../includes
-CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH)
+CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH) -g3# -fsanitize=address
 
 LIB_FT_FILES:=ft_atoi.c \
 	ft_bzero.c \
