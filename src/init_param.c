@@ -6,12 +6,15 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 18:21:35 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:17:11 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+
+#define WIN_BABYX 320
+#define WIN_BABYY 180
 #define WIN_SMALLX 854
 #define WIN_SMALLY 480
 #define WIN_MEDIUMX 1600
@@ -27,8 +30,17 @@
 #define VOID_COLOR 0x000000FF
 
 
+static void	init_size_helper(char *str, t_param *p)
+{
+	if (!ft_strncmp(str, "baby", 6))
+	{
+		p->w = WIN_BABYX;
+		p->h = WIN_BABYY;
+	}
+}
+
 /*
-Predefined size, all are 3:2 for ease of display.
+Predefined size, all are 16:9 for ease of display.
 The origin r0:i0 of the fractal will be excentric from the image
 */
 static int	init_size(char *str, t_param *p)
@@ -52,6 +64,8 @@ static int	init_size(char *str, t_param *p)
 			p->w = WIN_BIGCHUNGUSX;
 			p->h = WIN_BIGCHUNGUSY;			
 		}
+		else
+			init_size_helper(str, p);
 	}
 	p->screen_resolution = (long double)1 / (p->h / 2.5);
 	return (100);
@@ -62,14 +76,16 @@ Init constants for the sets requiring it
 static int	init_const(char *str, t_param *p)
 {
 	int	error;
-
+	
 	error = ft_atoz(&p->c, str);
+	printf("error=%i  str=%s\n", error, str);
 	if (error)
 	{
 		p->set = '0';
 		error_invalid_constant(error);
 		return (-1000);
 	}
+	printf("Const r=%LF  i=%LF\n",p->c.r, p->c.i);
 	return (10);
 }
 /*
@@ -92,6 +108,7 @@ static int	init_set(char *str, t_param *p)
 
 static int	checkif_error(int error, t_param *p)
 {
+	printf("error=%d", error);
 	if (error < 0)
 		return (error);
 	if (error < 100 && error >= 0)

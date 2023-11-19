@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 19:46:01 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/19 12:29:56 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 #include <fcntl.h>
 
 # ifndef MAX_ITER
-#  define MAX_ITER 256
+#  define MAX_ITER 512
 # endif
-# if (MAX_ITER > 512 || MAX_ITER <= 0)
-#  define MAX_ITER 64
+# if (MAX_ITER > 2048 || MAX_ITER <= 0)
+#  define MAX_ITER 256
 # endif
 # define MAX_CONVERGE 8
 
@@ -67,7 +67,7 @@ CORE
 
 int				generate_fractal(t_param *p);
 int				ft_image_update(t_param *p);
-void			ft_image_update_color(t_param *p, int color, uint8_t change);
+void			ft_image_update_color(t_param *p, int color, int change);
 
 /*
 SETS

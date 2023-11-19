@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 17:47:47 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/19 11:03:00 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,10 @@ static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
 	}
 }
 
-static void	ft_image_update_helper1(t_param *p)
-{
-	if (p->set == 'M')
-	{
-		p->img_origin.r = p->w - (p->w / 3);
-		p->img_origin.i = p->h / 2;
-	}
-	else if (p->set == 'J')
-	{
-		p->img_origin.r = p->w / 2;
-		p->img_origin.i = p->h / 2;
-	}
-}
-
 int	ft_image_update(t_param *p)
 {
 	unsigned int	pixel_y;
 
-	ft_image_update_helper1(p);
 	pixel_y = 0;
 	while (pixel_y < p->h)
 	{
