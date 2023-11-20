@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 11:03:00 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:27:17 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 	long double	r;
 	long double	i;
 
-	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->screen_resolution;
-	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->screen_resolution;
+	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->win_resolution;
+	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->win_resolution;
 	pixel_pos->i = i;
 	pixel_pos->r = r;
 }
@@ -47,6 +47,8 @@ int	ft_image_update(t_param *p)
 {
 	unsigned int	pixel_y;
 
+	if (!p->img)
+		return (-1);
 	pixel_y = 0;
 	while (pixel_y < p->h)
 	{

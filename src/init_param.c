@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 12:51:58 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:27:17 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	init_size(char *str, t_param *p)
 		else
 			init_size_helper(str, p);
 	}
-	p->screen_resolution = (long double)1 / (p->h / 2.5);
+	p->win_resolution = (long double)1 / (p->h / 2.5);
 	return (100);
 }
 /*
@@ -152,6 +152,6 @@ int	init_param(char **argv, int argc, t_param *p)
 	p->colors.green = GREEN_HUE;
 	p->colors.blue = BLUE_HUE;
 	p->colors.void_color = VOID_COLOR;
-	p->colors.magic = 2.0;
+	p->colors.magic = 5.0;
 	return (error);
 }

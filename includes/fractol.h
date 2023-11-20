@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 12:29:56 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:27:17 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <fcntl.h>
 
 # ifndef MAX_ITER
-#  define MAX_ITER 512
+#  define MAX_ITER 128
 # endif
 # if (MAX_ITER > 2048 || MAX_ITER <= 0)
 #  define MAX_ITER 256
@@ -52,7 +52,7 @@ typedef struct s_param
 	unsigned int	w;
 	unsigned int	h;
 	long double		zoom;
-	long double		screen_resolution;
+	long double		win_resolution;
 	t_i				img_origin;
 	t_i				c;
 	t_colors		colors;
@@ -80,6 +80,8 @@ unsigned int	mandlebrot_set(t_colors *colors, t_i *c);
 HOOKS
 */
 void			cptn_hook_keys(mlx_key_data_t keydata ,void *param);
+void			cptn_hook_resize(int width, int height, void *param);
+void			cptn_hook_scroll(double xdelta, double ydelta, void* param);
 void			cptn_hook_zoom(void *param);
 
 /*
@@ -87,6 +89,7 @@ HELPERS
 */
 
 int				ft_atoz(t_i *z, char *str);
+void			ft_get_image_origin(t_param *p);
 int				init_param(char **argv, int argc, t_param *p);
 int				args_help(void);
 int				error_invalid_set(char set);

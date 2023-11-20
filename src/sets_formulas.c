@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 12:21:15 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:13:55 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static unsigned int get_color(unsigned int n, t_colors *colors)
 	normalized_n = (float)n / (MAX_ITER / colors->magic + 0.001);
 	red = (unsigned int)(normalized_n * colors->red);
 	green = (unsigned int)(normalized_n * colors->green);
-	blue = (unsigned int)(normalized_n * colors->blue);
+	blue = (unsigned int)(1 - normalized_n * colors->blue);
 	color = (red << 24) + (green << 16) + (blue << 8) + 255;
 	return (color);
 }
