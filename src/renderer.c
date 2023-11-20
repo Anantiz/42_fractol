@@ -6,13 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 12:27:17 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:49:50 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
+void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 {
 	long double	r;
 	long double	i;
@@ -22,6 +22,7 @@ static void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 	pixel_pos->i = i;
 	pixel_pos->r = r;
 }
+
 static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
 {
 	t_i				pixel_coordinates;
@@ -35,9 +36,9 @@ static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
 		pixel_coordinates.i = pixel_y;
 		map_pixel_to_point(&pixel_coordinates, p);
 		if (p->set == 'M')
-			color = mandlebrot_set(&p->colors ,&pixel_coordinates);
+			color = mandlebrot_set(&p->colors, &pixel_coordinates);
 		else if (p->set == 'J')
-			color = julia_set(&p->colors ,&pixel_coordinates, &p->c);
+			color = julia_set(&p->colors, &pixel_coordinates, &p->c);
 		mlx_put_pixel(p->img, pixel_x, pixel_y, color);
 		pixel_x++;
 	}
@@ -57,4 +58,3 @@ int	ft_image_update(t_param *p)
 	}
 	return (0);
 }
-

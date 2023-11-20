@@ -6,11 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:57:51 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/19 13:00:50 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:50:05 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void	show_controls();
 
 int	main(int argc, char **argv)
 {
@@ -21,9 +23,23 @@ int	main(int argc, char **argv)
 		return (args_help());
 	if (init_param(argv, argc, &param) != 0)
 		return (args_help());
+	show_controls();
 	error = generate_fractal(&param);
 	if (error)
 		ft_printf("ERROR, could not open window error:%d\n", error);
-	//free_params(&param); Will be developped later
 	return (0);
+}
+
+static void	show_controls()
+{
+	ft_printf("\n\nControls:\n"
+		"\tUpdate RGB channel\n"
+		"\t\tRed:   'R_KEY' to increase 'F_KEY' to decrease\n"
+		"\t\tGreen: 'T_KEY' to increase 'G_KEY' to decrease\n"
+		"\t\tBlue:  'Y_KEY' to increase 'H_KEY' to decrease\n"
+		"\tUpdate Precision\n"
+		"\t\tRendering: 'L_KEY' to increase 'K_KEY' to decrease\n"
+		"\t\tColors:    'M_KEY' to increase 'N_KEY' to decrease\n"
+		"\tArrow keys to move the camera\n"
+		"");
 }

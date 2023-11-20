@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/19 13:10:50 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/20 17:02:18 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH) -ldl -lglfw -pthread -lm# -g3 -f
 RM:=rm -rf
 
 NAME:=fractol
-LIBFT= libft.a
+LIBFT=libft.a
 LIBMLX = libmlx42.a
 LIBS:=$(LIBFT) $(LIBMLX)
 
@@ -32,7 +32,8 @@ SRC_FILES:= main.c \
 	ft_atoz.c \
 	init_param.c \
 	captain_hook.c \
-	ft_image_update_colors.c
+	ft_image_update_colors.c \
+	color_and_camera.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))
