@@ -6,15 +6,15 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:40:05 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 13:01:05 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 21:54:50 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void update_iter_count(t_param *p, int direction);
+static void	update_iter_count(t_param *p, int direction);
 
-static void cptn_hook_keys2(mlx_key_data_t keydata, t_param *p)
+static void	cptn_hook_keys2(mlx_key_data_t keydata, t_param *p)
 {
 	if (keydata.key == MLX_KEY_R)
 		shift_color(p, SHIFT_RED, MV_UP, 0);
@@ -37,17 +37,17 @@ static void cptn_hook_keys2(mlx_key_data_t keydata, t_param *p)
 	else if (keydata.key == MLX_KEY_K)
 		update_iter_count(p, MV_DOWN);
 	else
-		return;
+		return ;
 	ft_image_update(p);
 }
 
-void cptn_hook_keys(mlx_key_data_t keydata, void *param)
+void	cptn_hook_keys(mlx_key_data_t keydata, void *param)
 {
-	t_param *p;
+	t_param	*p;
 
 	p = (t_param *)param;
 	if (keydata.action == MLX_RELEASE)
-		return;
+		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(p->mlx);
 	else if (keydata.key == MLX_KEY_RIGHT)
@@ -63,14 +63,14 @@ void cptn_hook_keys(mlx_key_data_t keydata, void *param)
 	else
 	{
 		cptn_hook_keys2(keydata, p);
-		return;
+		return ;
 	}
 	ft_image_update(p);
 }
 
-static void update_iter_count(t_param *p, int direction)
+static void	update_iter_count(t_param *p, int direction)
 {
-	long double dynamic;
+	long double	dynamic;
 
 	dynamic = 0.1 * (p->colors.max_iter * 1 / MAX_ITER_ADD);
 	if (direction == MV_UP)
@@ -89,9 +89,9 @@ static void update_iter_count(t_param *p, int direction)
 		p->colors.max_iter = MAX_ITER_ALLOWED;
 }
 
-void cptn_hook_resize(int width, int height, void *param)
+void	cptn_hook_resize(int width, int height, void *param)
 {
-	t_param *p;
+	t_param	*p;
 
 	p = (t_param *)param;
 	p->w = width;
@@ -104,54 +104,33 @@ void cptn_hook_resize(int width, int height, void *param)
 		p->img = NULL;
 	if (mlx_image_to_window(p->mlx, p->img, 0, 0) < 0)
 		p->img = NULL;
-	ft_get_image_origin(&p->img_origin ,p);
+	ft_get_image_origin(&p->oo_coordinate, p);
 	ft_printf("(I'm not dead)\t");
 	ft_image_update(p);
 	ft_printf("DONE\n");
 }
 
-void cptn_hook_scroll(double xdelta, double ydelta, void *param)
+void	cptn_hook_scroll(double xdelta, double ydelta, void *param)
 {
-	t_param *p;
-	t_i		win_origin;
-	int 	x;
-	int 	y;
-	t_i		pp;
+	t_param	*p;
 
 	p = (t_param *)param;
-	mlx_get_mouse_pos(p->mlx, &x, &y);
 	if (ydelta > 0)
 	{
-		p->zoom *= ZOOM_AMMOUNT;
-		pp.r = x;
-		pp.i = y;
-		map_pixel_to_point(&pp, p);
-		ft_get_image_origin(&win_origin, p);
-		//printf("Math: calc=%LF  img_or=%LF\tshit=%LF\n", (x * p->zoom), p->img_origin.r,(p->zoom * p->win_resolution));
-		p->img_origin.r += (p->zoom * p->win_resolution);// + (p->img_origin.r - (x * p->zoom));
-		p->img_origin.i += (p->zoom * p->win_resolution);// + (p->img_origin.i - (y * p->zoom));
-		printf("2Math:calc=%LF  ppr=%LF img_or=%LF\t\n",((pp.r) / (p->win_resolution))/p->zoom,pp.r ,p->img_origin.r);
-		p->img_origin.r -=  (pp.r) / (p->zoom * p->win_resolution);
-		p->img_origin.i -=  (pp.i) / (p->zoom * p->win_resolution);
-		shift_color(p, MAGIC_COLOR, MV_UP, 0.5);
+		p->zoom_count++;
+		shift_color(p, MAGIC_COLOR, MV_UP, MAX_ITER_ADD / 10);
 		update_iter_count(p, MV_UP);
 		ft_image_update(p);
 	}
 	else if (ydelta < 0)
 	{
-		if (p->zoom < 1.0)
-		{
-			ft_get_image_origin(&win_origin, p);
-			p->img_origin.r -= (p->zoom * p->win_resolution) + (win_origin.r - (x * p->zoom));
-			p->img_origin.i -= (p->zoom * p->win_resolution) + (win_origin.r - (x * p->zoom));
-		}
-		p->zoom /= ZOOM_AMMOUNT;
-		if (p->zoom > 1.0)
-			p->zoom = 1.0;
-		shift_color(p, MAGIC_COLOR, MV_DOWN, 0.5);
+		p->zoom_count--;
+		if (p->zoom_count < 1.0)
+			p->zoom_count = 1.0;
+		shift_color(p, MAGIC_COLOR, MV_DOWN, MAX_ITER_ADD / 10);
 		update_iter_count(p, MV_DOWN);
 		ft_image_update(p);
 	}
-	xdelta++;
-	// printf("o.r=%LF  o.r=%LF\n", p->img_origin.r, p->img_origin.i);
+	if (xdelta)
+		ft_printf("");
 }

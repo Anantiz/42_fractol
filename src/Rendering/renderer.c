@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:28:57 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 21:52:32 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,23 @@ void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 	long double	r;
 	long double	i;
 
-	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->win_resolution;
-	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->win_resolution;
+	r = (pixel_pos->r - p->oo_coordinate.r) * p->win_resolution * \
+		(pow(ZOOM_AMMOUNT, p->zoom_count));
+	i = (pixel_pos->i - p->oo_coordinate.i) * p->win_resolution * \
+		(pow(ZOOM_AMMOUNT, p->zoom_count));
 	pixel_pos->i = i;
 	pixel_pos->r = r;
+}
+
+void	map_point_to_pixel(t_i *point, t_param *p)
+{
+	long double	r;
+	long double	i;
+
+	r = (point->r / (p->win_resolution * (pow(ZOOM_AMMOUNT, p->zoom_count)))) \
+		+ p->oo_coordinate.r;
+	i = (point->i / (p->win_resolution * (pow(ZOOM_AMMOUNT, p->zoom_count)))) \
+		+ p->oo_coordinate.i;
+	point->r = r;
+	point->i = i;
 }

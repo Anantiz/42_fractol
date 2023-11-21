@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/21 11:35:19 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/21 22:00:11 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ all: fractol
 $(LIBMLX):
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
 	@mv $(LIBMLX_PATH)/build/$@ ./
+	$(RM) $(LIBMLX_PATH)/build
 	
 $(LIBFT):
 	@make -C $(LIBFT_PATH)/ all
@@ -58,7 +59,7 @@ DO_LIBS: $(LIBFT) $(LIBMLX)
 
 $(NAME): $(SRC_OBJECTS) | DO_LIBS
 	@$(CC) $^ $(LIBS) $(CFLAGS) -o $@
-	
+
 clean: 
 	@$(RM) $(SRC_OBJECTS)
 

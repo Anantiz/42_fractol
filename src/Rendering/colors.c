@@ -6,14 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:54:02 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:26:12 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 21:51:16 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 unsigned int	get_color(unsigned int n, t_colors *colors);
-void			shift_color(t_param *p, int color, int direction, float ammount);
 void			inverse_bg_color(t_param *p);
 
 /*
@@ -86,4 +85,3 @@ void	shift_color(t_param *p, int color, int direction, float ammount)
 		, p->colors.green, p->colors.blue);
 	}
 }
-

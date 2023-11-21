@@ -6,13 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:57:51 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:45:41 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 21:49:49 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	show_controls();
+static void	show_controls(void);
 
 int	main(int argc, char **argv)
 {
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-static void	show_controls()
+static void	show_controls(void)
 {
 	ft_printf("\n\nControls:\n"
 		"\tUpdate RGB channel\n"
