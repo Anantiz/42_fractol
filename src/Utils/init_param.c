@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 15:16:01 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:46:44 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,47 @@
 #define WIN_BIGCHUNGUSX 3840
 #define WIN_BIGCHUNGUSY 2160
 
-#define RED_HUE 219
-#define GREEN_HUE 67
-#define BLUE_HUE 165
+#define RED_HUE 0xda
+#define GREEN_HUE 0x44
+#define BLUE_HUE 0x00
 #define VOID_COLOR 0x000000FF
+
+int	init_param(char **argv, int argc, t_param *p);
+int	init_size(char *str, t_param *p);
+int	init_set(char *str, t_param *p);
+int	init_const(char *str, t_param *p);
+
+/*
+set  =  Fractal Set:  'M'= Mandlebrot 'J'= Julia"
+const=  Fractal Const: xxixx (x are digits)"
+size =  [baby, small, medium, large] impacts rendering speed\n");
+*/
+int	init_param(char **argv, int argc, t_param *p)
+{
+	int	error;
+
+	error = 0;
+	p->set = '0';
+	while (argc-- > 1)
+	{
+		if (!ft_strncmp(argv[argc], "set=", 4))
+			error += init_set(&argv[argc][4], p);
+		else if (!ft_strncmp(argv[argc], "const=", 6))
+			error += init_const(&argv[argc][6], p);
+		else if (!ft_strncmp(argv[argc], "size=", 5))
+			error += init_size(&argv[argc][5], p);
+	}
+	error = checkif_error(error, p);
+	p->zoom = 1.0;
+	p->colors.red = RED_HUE;
+	p->colors.green = GREEN_HUE;
+	p->colors.blue = BLUE_HUE;
+	p->colors.void_color = VOID_COLOR;
+	p->colors.magic = DEFAULT_MAGIC;
+	p->colors.max_iter = MAX_ITER;
+	p->colors.bg_color = 1;
+	return (error);
+}
 
 static void	init_size_helper(char *str, t_param *p)
 {
@@ -102,35 +139,4 @@ int	init_set(char *str, t_param *p)
 		return (-1000);
 	}
 	return (0);
-}
-
-/*
-set  =  Fractal Set:  'M'= Mandlebrot 'J'= Julia"
-const=  Fractal Const: xxixx (x are digits)"
-size =  [baby, small, medium, large] impacts rendering speed\n");
-*/
-int	init_param(char **argv, int argc, t_param *p)
-{
-	int	error;
-
-	error = 0;
-	p->set = '0';
-	while (argc-- > 1)
-	{
-		if (!ft_strncmp(argv[argc], "set=", 4))
-			error += init_set(&argv[argc][4], p);
-		else if (!ft_strncmp(argv[argc], "const=", 6))
-			error += init_const(&argv[argc][6], p);
-		else if (!ft_strncmp(argv[argc], "size=", 5))
-			error += init_size(&argv[argc][5], p);
-	}
-	error = checkif_error(error, p);
-	p->zoom = 1.0;
-	p->colors.red = RED_HUE;
-	p->colors.green = GREEN_HUE;
-	p->colors.blue = BLUE_HUE;
-	p->colors.void_color = VOID_COLOR;
-	p->colors.magic = DEFAULT_MAGIC;
-	p->colors.max_iter = MAX_ITER;
-	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 19:19:06 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:22:17 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_colors
 	unsigned int	void_color;
 	unsigned int	max_iter;
 	float			magic;
+	int				bg_color;
 }t_colors;
 
 typedef struct s_param
@@ -80,7 +81,6 @@ CORE
 
 int				generate_fractal(t_param *p);
 int				ft_image_update(t_param *p);
-void			ft_image_update_color(t_param *p, int color, int change);
 void			ft_get_image_origin(t_i *point, t_param *p);
 void			map_pixel_to_point(t_i *pixel_pos, t_param *p);
 
@@ -96,6 +96,7 @@ COLOR & CAM
 */
 
 unsigned int	get_color(unsigned int n, t_colors *colors);
+void			inverse_bg_color(t_param *p);
 void			shift_color(t_param *p, int color, int direction, float ammount);
 void			move_cam(t_param *p, int direction, long double move_amount);
 

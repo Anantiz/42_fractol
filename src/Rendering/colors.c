@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_and_camera.c                                 :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:54:02 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 19:01:15 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:26:12 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+unsigned int	get_color(unsigned int n, t_colors *colors);
+void			shift_color(t_param *p, int color, int direction, float ammount);
+void			inverse_bg_color(t_param *p);
 
 /*
 	Blue shift for faster infinity convergence
@@ -31,9 +35,17 @@ unsigned int	get_color(unsigned int n, t_colors *colors)
 	normalized_n = (float)n / ((float)colors->max_iter / colors->magic + 0.001);
 	red = (unsigned int)(normalized_n * colors->red);
 	green = (unsigned int)(normalized_n * colors->green);
-	blue = (unsigned int)(1 - normalized_n * colors->blue);
+	if (colors->bg_color == 1)
+		blue = (unsigned int)(1 - normalized_n * colors->blue);
+	else
+		blue = (unsigned int)(normalized_n * colors->blue);
 	color = (red << 24) + (green << 16) + (blue << 8) + 255;
 	return (color);
+}
+
+void	inverse_bg_color(t_param *p)
+{
+	p->colors.bg_color *= -1;
 }
 
 static int	shift_color_change(uint8_t *channel, int direction)
@@ -75,18 +87,3 @@ void	shift_color(t_param *p, int color, int direction, float ammount)
 	}
 }
 
-void	move_cam(t_param *p, int direction, long double move_amount)
-{
-	if (direction == MV_UP)
-		p->img_origin.i += (long double)p->h * move_amount \
-		* (p->zoom / p->zoom * 4);
-	else if (direction == MV_DOWN)
-		p->img_origin.i -= (long double)p->h * move_amount * \
-		(p->zoom / p->zoom * 4);
-	else if (direction == MV_RIGHT)
-		p->img_origin.r -= (long double)p->w * move_amount * \
-		(p->zoom / p->zoom * 4);
-	else if (direction == MV_LEFT)
-		p->img_origin.r += (long double)p->w * move_amount * \
-		(p->zoom / p->zoom * 4);
-}

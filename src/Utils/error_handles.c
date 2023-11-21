@@ -6,11 +6,16 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 15:04:49 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:26:41 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	args_help(void);
+int	error_invalid_set(char set);
+int	error_invalid_constant(int error);
+int	checkif_error(int error, t_param *p);
 
 int	args_help(void)
 {

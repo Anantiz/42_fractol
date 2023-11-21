@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/20 17:02:18 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/21 11:35:19 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,21 @@ SRC_PATH:=src
 LIBFT_PATH:=./libft
 LIBMLX_PATH	:= ./MLX42
 
+RENDING_PATH=Rendering
+COMPUTING_PATH=Computing
+UTILS_PATH=Utils
+HOOKS_PATH=Hooks
+
 SRC_FILES:= main.c \
-	renderer.c \
-	generator.c \
-	sets_formulas.c \
-	error_handles.c \
-	ft_atoz.c \
-	init_param.c \
-	captain_hook.c \
-	ft_image_update_colors.c \
-	color_and_camera.c
+	$(RENDING_PATH)/renderer.c \
+	$(RENDING_PATH)/generator.c \
+	$(RENDING_PATH)/colors.c \
+	$(RENDING_PATH)/camera.c \
+	$(COMPUTING_PATH)/sets_formulas.c \
+	$(COMPUTING_PATH)/ft_atoz.c \
+	$(UTILS_PATH)/error_handles.c \
+	$(UTILS_PATH)/init_param.c \
+	$(HOOKS_PATH)/captain_hook.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))

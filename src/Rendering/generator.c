@@ -6,25 +6,14 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:04:29 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 19:19:33 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:29:06 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_get_image_origin(t_i *point, t_param *p)
-{
-	if (p->set == 'M')
-	{
-		point->r = p->w - (p->w / 3);
-		point->i = p->h / 2;
-	}
-	else if (p->set == 'J')
-	{
-		point->r = p->w / 2;
-		point->i = p->h / 2;
-	}
-}
+int		generate_fractal(t_param *p);
+void	ft_get_image_origin(t_i *point, t_param *p);
 
 int	generate_fractal(t_param *p)
 {
@@ -45,4 +34,18 @@ int	generate_fractal(t_param *p)
 	if (p->mlx)
 		mlx_terminate(p->mlx);
 	return (0);
+}
+
+void	ft_get_image_origin(t_i *point, t_param *p)
+{
+	if (p->set == 'M')
+	{
+		point->r = p->w - (p->w / 3);
+		point->i = p->h / 2;
+	}
+	else if (p->set == 'J')
+	{
+		point->r = p->w / 2;
+		point->i = p->h / 2;
+	}
 }

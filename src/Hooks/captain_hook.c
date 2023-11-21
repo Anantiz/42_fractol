@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:40:05 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 19:29:36 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:53:02 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void cptn_hook_keys(mlx_key_data_t keydata, void *param)
 		move_cam(p, MV_UP, MOVE_AMMOUNT);
 	else if (keydata.key == MLX_KEY_DOWN)
 		move_cam(p, MV_DOWN, MOVE_AMMOUNT);
+	else if (keydata.key == MLX_KEY_SPACE)
+		inverse_bg_color(p);
 	else
 	{
 		cptn_hook_keys2(keydata, p);
@@ -111,7 +113,7 @@ void cptn_hook_resize(int width, int height, void *param)
 void cptn_hook_scroll(double xdelta, double ydelta, void *param)
 {
 	t_param *p;
-	t_i		default_origin;
+	t_i		win_origin;
 	int 	x;
 	int 	y;
 
@@ -120,10 +122,11 @@ void cptn_hook_scroll(double xdelta, double ydelta, void *param)
 	if (ydelta > 0)
 	{
 		p->zoom *= ZOOM_AMMOUNT;
-		p->img_origin.r += ((p->w / 2.0) - x);
-		p->img_origin.i += ((p->h / 2.0) - y) ;
-		shift_color(p, MAGIC_COLOR, MV_UP, 0.5);
-		update_iter_count(p, MV_UP);
+		ft_get_image_origin(&win_origin, p);
+		p->img_origin.r += (win_origin.r - x) * (ZOOM_AMMOUNT / p->zoom);
+		p->img_origin.i += (win_origin.i - y) * (ZOOM_AMMOUNT / p->zoom);
+		//shift_color(p, MAGIC_COLOR, MV_UP, 0.5);
+		//update_iter_count(p, MV_UP);
 	}
 	else if (ydelta < 0)
 	{
@@ -132,9 +135,9 @@ void cptn_hook_scroll(double xdelta, double ydelta, void *param)
 			p->zoom = 1.0;
 		else
 		{
-			ft_get_image_origin(&default_origin, p);
-			p->img_origin.r += (default_origin.r - p->img_origin.r) * p->zoom;
-			p->img_origin.i += (default_origin.i - p->img_origin.i) * p->zoom;
+			ft_get_image_origin(&win_origin, p);
+			p->img_origin.r += (win_origin.r - p->img_origin.r) * (p->zoom / p->win_resolution);
+			p->img_origin.i += (win_origin.i - p->img_origin.i) * (p->zoom / p->win_resolution);
 		}
 		shift_color(p, MAGIC_COLOR, MV_DOWN, 0.5);
 		update_iter_count(p, MV_DOWN);

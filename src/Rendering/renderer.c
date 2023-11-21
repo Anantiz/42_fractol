@@ -6,21 +6,29 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 18:49:50 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:28:57 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
-{
-	long double	r;
-	long double	i;
+int			ft_image_update(t_param *p);
+static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y);
+void		map_pixel_to_point(t_i *pixel_pos, t_param *p);
 
-	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->win_resolution;
-	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->win_resolution;
-	pixel_pos->i = i;
-	pixel_pos->r = r;
+int	ft_image_update(t_param *p)
+{
+	unsigned int	pixel_y;
+
+	if (!p->img)
+		return (-1);
+	pixel_y = 0;
+	while (pixel_y < p->h)
+	{
+		ft_image_update_helper2(p, pixel_y);
+		pixel_y++;
+	}
+	return (0);
 }
 
 static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
@@ -44,17 +52,13 @@ static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
 	}
 }
 
-int	ft_image_update(t_param *p)
+void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 {
-	unsigned int	pixel_y;
+	long double	r;
+	long double	i;
 
-	if (!p->img)
-		return (-1);
-	pixel_y = 0;
-	while (pixel_y < p->h)
-	{
-		ft_image_update_helper2(p, pixel_y);
-		pixel_y++;
-	}
-	return (0);
+	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->win_resolution;
+	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->win_resolution;
+	pixel_pos->i = i;
+	pixel_pos->r = r;
 }

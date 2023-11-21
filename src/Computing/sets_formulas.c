@@ -6,11 +6,14 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/20 18:02:32 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:29:35 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+unsigned int	mandlebrot_set(t_colors *colors, t_i *c);
+unsigned int	julia_set(t_colors *colors, t_i *z, t_i *c);
 
 /*
 C is a constant based on pixel value, Z starts at 0
