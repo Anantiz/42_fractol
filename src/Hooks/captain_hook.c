@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:40:05 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:53:02 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:01:05 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,34 +116,42 @@ void cptn_hook_scroll(double xdelta, double ydelta, void *param)
 	t_i		win_origin;
 	int 	x;
 	int 	y;
+	t_i		pp;
 
 	p = (t_param *)param;
 	mlx_get_mouse_pos(p->mlx, &x, &y);
 	if (ydelta > 0)
 	{
 		p->zoom *= ZOOM_AMMOUNT;
+		pp.r = x;
+		pp.i = y;
+		map_pixel_to_point(&pp, p);
 		ft_get_image_origin(&win_origin, p);
-		p->img_origin.r += (win_origin.r - x) * (ZOOM_AMMOUNT / p->zoom);
-		p->img_origin.i += (win_origin.i - y) * (ZOOM_AMMOUNT / p->zoom);
-		//shift_color(p, MAGIC_COLOR, MV_UP, 0.5);
-		//update_iter_count(p, MV_UP);
+		//printf("Math: calc=%LF  img_or=%LF\tshit=%LF\n", (x * p->zoom), p->img_origin.r,(p->zoom * p->win_resolution));
+		p->img_origin.r += (p->zoom * p->win_resolution);// + (p->img_origin.r - (x * p->zoom));
+		p->img_origin.i += (p->zoom * p->win_resolution);// + (p->img_origin.i - (y * p->zoom));
+		printf("2Math:calc=%LF  ppr=%LF img_or=%LF\t\n",((pp.r) / (p->win_resolution))/p->zoom,pp.r ,p->img_origin.r);
+		p->img_origin.r -=  (pp.r) / (p->zoom * p->win_resolution);
+		p->img_origin.i -=  (pp.i) / (p->zoom * p->win_resolution);
+		shift_color(p, MAGIC_COLOR, MV_UP, 0.5);
+		update_iter_count(p, MV_UP);
+		ft_image_update(p);
 	}
 	else if (ydelta < 0)
 	{
+		if (p->zoom < 1.0)
+		{
+			ft_get_image_origin(&win_origin, p);
+			p->img_origin.r -= (p->zoom * p->win_resolution) + (win_origin.r - (x * p->zoom));
+			p->img_origin.i -= (p->zoom * p->win_resolution) + (win_origin.r - (x * p->zoom));
+		}
 		p->zoom /= ZOOM_AMMOUNT;
 		if (p->zoom > 1.0)
 			p->zoom = 1.0;
-		else
-		{
-			ft_get_image_origin(&win_origin, p);
-			p->img_origin.r += (win_origin.r - p->img_origin.r) * (p->zoom / p->win_resolution);
-			p->img_origin.i += (win_origin.i - p->img_origin.i) * (p->zoom / p->win_resolution);
-		}
 		shift_color(p, MAGIC_COLOR, MV_DOWN, 0.5);
 		update_iter_count(p, MV_DOWN);
+		ft_image_update(p);
 	}
 	xdelta++;
-	ft_image_update(p);
-	printf("ZOOM=%LF\t", p->zoom);
-	printf("o.r=%LF  o.r=%LF\n", p->img_origin.r, p->img_origin.i);
+	// printf("o.r=%LF  o.r=%LF\n", p->img_origin.r, p->img_origin.i);
 }
