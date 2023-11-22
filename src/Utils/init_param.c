@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 21:50:00 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 00:37:51 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,10 @@ int	init_set(char *str, t_param *p)
 {
 	if (*str == 'M' || *str == 'm')
 		p->set = 'M';
+	else if (*str == 'C' || *str == 'c')
+		p->set = 'C';
+	else if (*str == 'W' || *str == 'w')
+		p->set = 'W';
 	else if (*str == 'J' || *str == 'j')
 		p->set = 'J';
 	else

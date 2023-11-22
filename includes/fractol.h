@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 21:49:33 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 01:04:31 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@
 # define SHIFT_BLUE 2
 # define DEFAULT_MAGIC 5.0
 
-// 2**23, cuz it is a power of 2, the pc will crash before it anyway
 # define MAX_ITER_ALLOWED 8388608
 
-/*
-Fake Enums cuz lazy
-*/
 # define MV_RIGHT 2
 # define MV_LEFT -2
 # define MV_UP 1
@@ -65,7 +61,6 @@ typedef struct s_param
 {
 	unsigned int	w;
 	unsigned int	h;
-//	long double		zoom;
 	long double		zoom_count;
 	long double		win_resolution;
 	t_i				oo_coordinate;
@@ -83,6 +78,13 @@ CORE
 int				generate_fractal(t_param *p);
 int				ft_image_update(t_param *p);
 void			ft_get_image_origin(t_i *point, t_param *p);
+
+/*
+MATH
+*/
+
+int				ft_atoz(t_i *z, char *str);
+long double		ft_abs(long double n);
 void			map_pixel_to_point(t_i *pixel_pos, t_param *p);
 void			map_point_to_pixel(t_i *point, t_param *p);
 
@@ -91,6 +93,7 @@ SETS
 */
 
 unsigned int	julia_set(t_colors *colors, t_i *z, t_i *c);
+unsigned int	celtic_set(t_colors *colors, t_i *c);
 unsigned int	mandlebrot_set(t_colors *colors, t_i *c);
 
 /*
@@ -99,7 +102,8 @@ COLOR & CAM
 
 unsigned int	get_color(unsigned int n, t_colors *colors);
 void			inverse_bg_color(t_param *p);
-void			shift_color(t_param *p, int color, int direction, float ammount);
+void			shift_color(t_param *p, int color, int dir, float ammount);
+void			update_iter_count(t_param *p, int direction, float ammount);
 void			move_cam(t_param *p, int direction, long double move_amount);
 
 /*
@@ -118,7 +122,6 @@ int				init_param(char **argv, int argc, t_param *p);
 int				init_const(char *str, t_param *p);
 int				init_set(char *str, t_param *p);
 int				init_size(char *str, t_param *p);
-int				ft_atoz(t_i *z, char *str);
 
 /*
 ERROR AND DISPLAY

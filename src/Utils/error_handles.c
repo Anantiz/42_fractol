@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 15:26:08 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 00:56:50 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	args_help(void)
 {
 	ft_printf("Parameters:\n"
 		"\tset=X    (REQUIRED)\n"
-		"\t\t'J'= Julia 'M'= Mandlebrot\n"
+		"\t\t'J'= Julia 'M'= Mandlebrot 'C'= Celtic 'W'=weed(plaing trip)\n"
 		"\tconst=X  (For Julias set\n"
 		"\t\tMust be written as **i** ('*' as digits)\n"
 		"\t\tSome recommended constants: 0.285i0.01  0.285i0.013  "
@@ -58,7 +58,7 @@ int	checkif_error(int error, t_param *p)
 	if (error < 100 && error >= 0)
 		error += init_size(NULL, p);
 	error -= 100;
-	if (p->set == 'J' || error >= 10)
+	if (p->set == 'J' || p->set == 'W' || error >= 10)
 	{
 		if (error >= 10)
 			error -= 10;

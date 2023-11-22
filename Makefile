@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/21 22:00:11 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/22 00:57:51 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRC_FILES:= main.c \
 	$(RENDING_PATH)/camera.c \
 	$(COMPUTING_PATH)/sets_formulas.c \
 	$(COMPUTING_PATH)/ft_atoz.c \
+	$(COMPUTING_PATH)/iter_count.c \
+	$(COMPUTING_PATH)/ft_abs.c \
 	$(UTILS_PATH)/error_handles.c \
 	$(UTILS_PATH)/init_param.c \
 	$(HOOKS_PATH)/captain_hook.c
@@ -49,6 +51,7 @@ $(LIBMLX):
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
 	@mv $(LIBMLX_PATH)/build/$@ ./
 	$(RM) $(LIBMLX_PATH)/build
+	$(RM) $(LIBMLX_PATH)/CmakeFiles
 	
 $(LIBFT):
 	@make -C $(LIBFT_PATH)/ all
@@ -64,7 +67,7 @@ clean:
 	@$(RM) $(SRC_OBJECTS)
 
 fclean: clean
-	@$(RM) $(NAME) $(LIBS)
+	@$(RM) $(NAME) $(LIBS) 
 
 re: fclean all
 
