@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:29:35 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:02:37 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ unsigned int	mandlebrot_set(t_colors *colors, t_i *c)
 	long double		zr;
 	t_i				z;
 
-	z.r = 0;
-	z.i = 0;
+	z.r = 0.0;
+	z.i = 0.0;
 	n = 0;
 	while (n < colors->max_iter)
 	{
@@ -33,6 +33,27 @@ unsigned int	mandlebrot_set(t_colors *colors, t_i *c)
 			break ;
 		zr = z.r;
 		z.r = (z.r * z.r) - (z.i * z.i) + c->r;
+		z.i = 2 * (zr * z.i) + c->i;
+		n++;
+	}
+	return (get_color(n, colors));
+}
+
+unsigned int	celtic_set(t_colors *colors, t_i *c)
+{
+	unsigned int	n;
+	long double		zr;
+	t_i				z;
+
+	z.r = 0.0;
+	z.i = 0.0;
+	n = 0;
+	while (n < colors->max_iter)
+	{
+		if (((z.r * z.r) + (z.i * z.i)) > MAX_CONVERGE)
+			break ;
+		zr = z.r;
+		z.r = ft_abs((z.r * z.r) - (z.i * z.i)) + c->r;
 		z.i = 2 * (zr * z.i) + c->i;
 		n++;
 	}

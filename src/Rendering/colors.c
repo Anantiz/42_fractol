@@ -6,14 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:54:02 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:26:12 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 01:05:36 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 unsigned int	get_color(unsigned int n, t_colors *colors);
-void			shift_color(t_param *p, int color, int direction, float ammount);
 void			inverse_bg_color(t_param *p);
 
 /*
@@ -61,29 +60,33 @@ static int	shift_color_change(uint8_t *channel, int direction)
 	return (change);
 }
 
-void	shift_color(t_param *p, int color, int direction, float ammount)
+static int	shift_color_magic(t_param *p, int dir, float ammount)
 {
-	int	change;
-
-	change = 0;
-	if (color == MAGIC_COLOR)
+	if (dir == MV_UP)
+		p->colors.magic += ammount;
+	else
 	{
-		if (direction == MV_UP && 0 == change++)
-			p->colors.magic += DEFAULT_MAGIC * ammount;
+		if (p->colors.magic - ammount > 1.5)
+			p->colors.magic -= ammount;
 		else
-			if (p->colors.magic - DEFAULT_MAGIC > 0)
-				p->colors.magic -= DEFAULT_MAGIC * ammount;
+			p->colors.magic = 1.5;
 	}
+	return (1);
+}
+
+void	shift_color(t_param *p, int color, int dir, float ammount)
+{
+	if (color == MAGIC_COLOR)
+		shift_color_magic(p, dir, ammount);
 	else
 	{
 		if (color == SHIFT_RED)
-			change = shift_color_change(&p->colors.red, direction);
+			shift_color_change(&p->colors.red, dir);
 		else if (color == SHIFT_GREEN)
-			change = shift_color_change(&p->colors.green, direction);
+			shift_color_change(&p->colors.green, dir);
 		else if (color == SHIFT_BLUE)
-			change = shift_color_change(&p->colors.blue, direction);
+			shift_color_change(&p->colors.blue, dir);
 		ft_printf("NEW COLORS= r=%u  g=%u  b=%u\n", p->colors.red \
 		, p->colors.green, p->colors.blue);
 	}
 }
-

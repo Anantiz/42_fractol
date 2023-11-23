@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:26:41 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 00:56:50 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ int	checkif_error(int error, t_param *p);
 
 int	args_help(void)
 {
-	ft_printf("Parameters:"
-		"\n\t(required)set=your_set     Fractal Sets:  'M'= Mandlebrot "
-		"'J'= Julia"
-		"\n\t(depends )const=set const  Fractal Const: xxixx (x are digits)"
-		"\n\t\t  Some recommended constants: 0.285i0.01  0.285i0.013  "
-		"-0,038088i0.9754633"
-		"\n\t(optional)size=size        [baby, small, medium, large, big_chu"
-		"ngus]  impacts rendering speed\n");
+	ft_printf("Parameters:\n"
+		"\tset=X    (REQUIRED)\n"
+		"\t\t'J'= Julia 'M'= Mandlebrot 'C'= Celtic 'W'=weed(plaing trip)\n"
+		"\tconst=X  (For Julias set\n"
+		"\t\tMust be written as **i** ('*' as digits)\n"
+		"\t\tSome recommended constants: 0.285i0.01  0.285i0.013  "
+		"-0,038088i0.9754633\n"
+		"\tsize=X   (Optional)\n"
+		"\t\t[baby, small, medium, large, big_chungus]\n");
 	return (0);
 }
 
@@ -57,7 +58,7 @@ int	checkif_error(int error, t_param *p)
 	if (error < 100 && error >= 0)
 		error += init_size(NULL, p);
 	error -= 100;
-	if (p->set == 'J' || error >= 10)
+	if (p->set == 'J' || p->set == 'W' || error >= 10)
 	{
 		if (error >= 10)
 			error -= 10;

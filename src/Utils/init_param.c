@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:50:07 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:46:44 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 00:37:51 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	init_param(char **argv, int argc, t_param *p)
 			error += init_size(&argv[argc][5], p);
 	}
 	error = checkif_error(error, p);
-	p->zoom = 1.0;
 	p->colors.red = RED_HUE;
 	p->colors.green = GREEN_HUE;
 	p->colors.blue = BLUE_HUE;
@@ -62,6 +61,7 @@ int	init_param(char **argv, int argc, t_param *p)
 	p->colors.magic = DEFAULT_MAGIC;
 	p->colors.max_iter = MAX_ITER;
 	p->colors.bg_color = 1;
+	p->zoom_count = 0;
 	return (error);
 }
 
@@ -130,6 +130,10 @@ int	init_set(char *str, t_param *p)
 {
 	if (*str == 'M' || *str == 'm')
 		p->set = 'M';
+	else if (*str == 'C' || *str == 'c')
+		p->set = 'C';
+	else if (*str == 'W' || *str == 'w')
+		p->set = 'W';
 	else if (*str == 'J' || *str == 'j')
 		p->set = 'J';
 	else

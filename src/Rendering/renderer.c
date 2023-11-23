@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/21 11:28:57 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/22 00:55:36 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ static void	ft_image_update_helper2(t_param *p, unsigned int pixel_y)
 		map_pixel_to_point(&pixel_coordinates, p);
 		if (p->set == 'M')
 			color = mandlebrot_set(&p->colors, &pixel_coordinates);
+		else if (p->set == 'C')
+			color = celtic_set(&p->colors, &pixel_coordinates);
+		else if (p->set == 'W')
+		{
+			p->c.r = pixel_coordinates.i + 0.1;
+			p->c.i = pixel_coordinates.r - 0.1;
+			color = julia_set(&p->colors, &pixel_coordinates, &p->c);
+		}
 		else if (p->set == 'J')
 			color = julia_set(&p->colors, &pixel_coordinates, &p->c);
 		mlx_put_pixel(p->img, pixel_x, pixel_y, color);
@@ -57,8 +65,23 @@ void	map_pixel_to_point(t_i *pixel_pos, t_param *p)
 	long double	r;
 	long double	i;
 
-	r = (pixel_pos->r - p->img_origin.r) * p->zoom * p->win_resolution;
-	i = (pixel_pos->i - p->img_origin.i) * p->zoom * p->win_resolution;
+	r = (pixel_pos->r - p->oo_coordinate.r) * p->win_resolution * \
+		(pow(ZOOM_AMMOUNT, p->zoom_count));
+	i = (pixel_pos->i - p->oo_coordinate.i) * p->win_resolution * \
+		(pow(ZOOM_AMMOUNT, p->zoom_count));
 	pixel_pos->i = i;
 	pixel_pos->r = r;
+}
+
+void	map_point_to_pixel(t_i *point, t_param *p)
+{
+	long double	r;
+	long double	i;
+
+	r = (point->r / (p->win_resolution * (pow(ZOOM_AMMOUNT, p->zoom_count)))) \
+		+ p->oo_coordinate.r;
+	i = (point->i / (p->win_resolution * (pow(ZOOM_AMMOUNT, p->zoom_count)))) \
+		+ p->oo_coordinate.i;
+	point->r = r;
+	point->i = i;
 }
