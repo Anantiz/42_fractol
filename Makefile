@@ -6,13 +6,13 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/12/02 13:59:32 by aurban           ###   ########.fr        #
+#    Updated: 2023/12/14 22:19:40 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC:=gcc
 INCLUDE_PATH=./includes
-CFLAGS:=-O3 -Wall -Werror -Wextra -I$(INCLUDE_PATH) -ldl -lglfw -pthread -lm# -g3 -fsanitize=address
+CFLAGS:=-O3 -Wall -Wextra -I$(INCLUDE_PATH) -ldl -lglfw -pthread -lm# -g3 -fsanitize=address
 RM:=rm -rf
 
 NAME:=fractol
