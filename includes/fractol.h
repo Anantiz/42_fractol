@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/23 16:03:01 by aurban           ###   ########.fr       */
+/*   Updated: 2024/06/05 13:21:20 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define MAX_ITER 128
 # define MAX_ITER_ADD 8
-# define MAX_CONVERGE 2
+# define MAX_CONVERGE 10
 # define SHIFT_RED 0
 # define SHIFT_GREEN 1
 # define SHIFT_BLUE 2
